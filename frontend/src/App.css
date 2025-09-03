@@ -1810,8 +1810,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 24px;
-  max-width: 800px;
-  margin: 0 auto;
+  /* max-width: 800px; */
+  /* margin: 0 auto; */
 }
 
 .contact-item-colorful {
@@ -1859,6 +1859,10 @@
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .contact-label {
@@ -1874,6 +1878,10 @@
   font-size: 1rem;
   color: #ffffff;
   font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 /* Colorful Footer */

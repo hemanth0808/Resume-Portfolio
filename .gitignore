@@ -49,8 +49,13 @@ dump.rdb
 # Python
 __pycache__/
 *pyc*
+*/env/
+*/venv/
+*env*/
 venv/
 .venv/
+portfolio_env/
+backend/portfolio_env/
 
 # Development tools
 chainlit.md

@@ -188,12 +188,12 @@ const ColorfulPortfolio = ({ data, apiStatus }) => {
                 <div className="project-image-wrapper">
                   <img src={project.image} alt={project.name} className="project-image" />
                   <div className="project-gradient-overlay"></div>
-                  <div className="project-actions">
+                  {/* <div className="project-actions">
                     <a href={project.link} className="project-link-btn">
                       <ExternalLink className="link-icon" />
                       <span>View Project</span>
                     </a>
-                  </div>
+                  </div> */}
                 </div>
                 
                 <div className="project-content-colorful">
