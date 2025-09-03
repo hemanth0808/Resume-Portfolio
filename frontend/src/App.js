@@ -1,38 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MonochromePortfolio from "./components/MonochromePortfolio";
 import ColorfulPortfolio from "./components/ColorfulPortfolio";
-import { portfolioData, designThemes } from "./data/mock";
+import { portfolioData } from "./data/mock";
+import { Toaster } from "./components/ui/toaster";
+import { testConnection } from "./services/api";
 
 function App() {
-  const [currentTheme, setCurrentTheme] = useState("monochrome");
+  const [apiStatus, setApiStatus] = useState('checking');
 
-  const toggleTheme = () => {
-    setCurrentTheme(currentTheme === "monochrome" ? "colorful" : "monochrome");
-  };
+  useEffect(() => {
+    // Test API connection on app start
+    const checkAPI = async () => {
+      try {
+        await testConnection();
+        setApiStatus('connected');
+        console.log('✅ Backend API connected successfully');
+      } catch (error) {
+        setApiStatus('error');
+        console.error('❌ Backend API connection failed:', error);
+      }
+    };
+
+    checkAPI();
+  }, []);
 
   return (
     <div className="App">
       <BrowserRouter>
-        <div className="theme-toggle-container">
-          <button 
-            onClick={toggleTheme}
-            className="theme-toggle-btn"
-          >
-            Switch to {currentTheme === "monochrome" ? "Colorful" : "Monochrome"} Design
-          </button>
-        </div>
         <Routes>
           <Route 
             path="/" 
-            element={
-              currentTheme === "monochrome" ? 
-              <MonochromePortfolio data={portfolioData} /> : 
-              <ColorfulPortfolio data={portfolioData} />
-            } 
+            element={<ColorfulPortfolio data={portfolioData} apiStatus={apiStatus} />} 
           />
         </Routes>
+        <Toaster />
       </BrowserRouter>
     </div>
   );

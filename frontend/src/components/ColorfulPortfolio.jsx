@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { ChevronDown, ExternalLink, Mail, Phone, Github, Linkedin, MapPin, Code, Briefcase, GraduationCap, Award, Settings, Database, Cloud, Monitor, Zap, Cpu, Globe } from 'lucide-react';
+import ContactForm from './ContactForm';
 
-const ColorfulPortfolio = ({ data }) => {
+const ColorfulPortfolio = ({ data, apiStatus }) => {
   const [showAllProjects, setShowAllProjects] = useState(false);
 
   return (
@@ -335,6 +336,24 @@ const ColorfulPortfolio = ({ data }) => {
                     <span className="contact-value">View my code</span>
                   </div>
                 </a>
+              </div>
+              
+              {/* Contact Form Integration */}
+              <div className="contact-form-section">
+                <h3 className="form-section-title">Send me a message</h3>
+                {apiStatus === 'connected' ? (
+                  <ContactForm />
+                ) : apiStatus === 'checking' ? (
+                  <div className="api-status checking">
+                    <div className="status-indicator"></div>
+                    <span>Connecting to server...</span>
+                  </div>
+                ) : (
+                  <div className="api-status error">
+                    <div className="status-indicator"></div>
+                    <span>Contact form temporarily unavailable. Please use email above.</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
